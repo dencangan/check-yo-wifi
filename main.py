@@ -2,6 +2,7 @@ import os
 import time
 from datetime import datetime
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 # Wifi windows commands
 WIFI_NAME_CMD = """powershell -Command "& {(netsh wlan show interfaces) -Match '^\s+Profile' -Replace '^\s+Profile\s+:\s+',''"}"""
@@ -37,21 +38,19 @@ def record_data(
 
 
 if __name__ == '__main__':
-    RECORD_TIME = 240
+    RECORD_TIME = 600
     x, t, ts, te, wf_name = record_data(record_time=RECORD_TIME, cmd=WIFI_SIGNAL_CMD)
-    plt.title(wf_name)
-    plt.ylabel('Wifi Strength %')
-    plt.ylim(0, 100)
-    plt.xlabel('Time')
-    plt.xlim(ts, te)
-    plt.plot(t, x)
-    plt.legend(["Received Mbps"])
 
-    #
-    # plt.title(wf_name)
-    # plt.ylabel('Wifi Strength %')
-    # plt.ylim(0, 100)
-    # plt.xlabel('Time')
-    # plt.xlim(ts, te)
-    # plt.plot(t, x)
-    # plt.legend(["Signal"])
+    fig, ax = plt.subplots(1)
+    fig.autofmt_xdate()
+    plt.title(wf_name)
+
+    xfmt = mdates.DateFormatter('%H:%M:%S')
+    ax.xaxis.set_major_formatter(xfmt)
+
+    plt.plot(t, x)
+    plt.ylim(0, 100)
+    plt.legend(["Signal"])
+
+    plt.xlabel('Time')
+    plt.ylabel('Wifi Strength %')
