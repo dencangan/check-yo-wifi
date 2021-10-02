@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -n "Record WiFi signal for how many seconds? "
+read seconds
+for (( i=0; i<$seconds; i++ )); do /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI >> output.txt; sleep 1; done;
