@@ -9,6 +9,19 @@ An option to track receive and transmit data in Mbps is also available. Here is 
 ![wifi_chart](Figure_1.png)
 
 
+## Windows 10
+Uses powershell commands to record signal and plots a line graph. Record time argument in seconds. 
+See 'wifiSignalWin10.py' file. There are also commands to track 'Transmit/Receive (mbps)' rate too. 
+
+## MacOs
+Records WiFi signal in dBm values and output grep to a txt file.
+
+On terminal<br>
+1. `$ chmod +x wifiSignalMacOS`<br>
+2. `./wifiSignalMacOS`<br>
+3. `Enter input integer (seconds).`
+
 Some other features to add in the future:
-- Add moving average
-- Windows support only at the moment, will add MacOs and Linux too soon. 
+- Add moving average.
+- Parse MacOS txt output to support plotting too.
+- To add Linux support soon.
